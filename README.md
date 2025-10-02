@@ -52,6 +52,31 @@ A tiny lab prototype that bootstraps a symmetric key from a server to one or mor
 
 ---
 
+```mermaid
+    sequenceDiagram
+    autonumber
+    participant Server
+    participant Device
+
+    Note over Server,Device: Initial bootstrap
+
+    Device->>Server: Register public key (Kyber-1024)
+    Server->>Device: Ticket { epoch, ttl, ct_b64, tag }
+
+    Note over Device: Verify HMAC, audience, freshness
+    Device->>Device: Decapsulate(ct, sk) -> ss
+    Device->>Device: HKDF(ss || cohort_secret) -> key_epoch
+
+    Note over Server,Device: Loop mode (every 60s)
+
+    loop Every epoch
+        Server->>Device: New ticket for epoch N
+        Device->>Device: Derive new key N
+    end
+```
+
+---
+
 ## Directory layout
 
 - `keys/` device private and public keys (`.sk`, `.pk`)
