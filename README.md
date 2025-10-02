@@ -23,6 +23,9 @@ A tiny lab prototype that bootstraps a symmetric key from a server to one or mor
 - **`device_ratchet.py`**  
   Builds on `device.py`. After the first successful ticket, it initialises a root key and a chain key. Each call derives a new working key and advances the chain with HMAC. If a newer ticket is present, it mixes the fresh Kyber secret into the chain for post-compromise recovery.
 
+- **`device_loop_ratchet.py`**  
+  A full **offline-capable ratchet loop**. It bootstraps from a server ticket once, then advances the ratchet state every 60 seconds even if the server is unreachable. When a fresh ticket is received later, it mixes the new Kyber shared secret into the chain for post-compromise recovery. This ensures keys continue rotating every minute regardless of server connectivity.
+
 ---
 
 ## How it works
