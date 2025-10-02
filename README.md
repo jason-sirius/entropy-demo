@@ -122,6 +122,28 @@ pip install cryptography
    ```
    This will keep deriving new working keys on each call, and mix in fresh entropy if a new ticket is available.
 
+4. **Loop mode (live demo)**  
+   To see fresh tickets and derived keys every 60 seconds, you can use the loop scripts.
+
+   - Start the server loop in one terminal:
+     ```bash
+     python server_loop.py
+     ```
+     This will generate a new ticket for each device in `registry/` every 60 seconds.
+
+   - Start the device loop in another terminal:
+     ```bash
+     python device_loop.py
+     ```
+     This will read the latest ticket every 60 seconds and derive a new symmetric key.
+
+   Example output:
+   ```bash
+   [server-loop] Issued ticket for DT-042 at Sat Oct 5 14:32:00 2025
+   [DT-042-loop] Sat Oct 5 14:32:01 2025 derived key: 4a0f…
+   ```
+   - To simulate a second device, copy `device.py` to `device2.py`, change `DEVICE_ID`, run it once to register the new key, then run `python device_loop.py` for that device. The server will issue tickets for both, and each will derive its own key.
+
 ---
 
 ## Security model
