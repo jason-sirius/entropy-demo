@@ -1,0 +1,35 @@
+# ===== Python build artifacts =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# ===== Virtual environments =====
+venv/
+.env/
+.env*/
+.venv/
+
+# ===== Local secrets and keys =====
+keys/
+registry/
+tickets/
+state/
+logs/
+
+# If you want to keep registry (device public keys) in Git,
+# comment out the "registry/" line above. But better safe than sorry.
+
+# ===== OS junk =====
+.DS_Store
+Thumbs.db
+
+# ===== Editor configs =====
+*.swp
+*.swo
+.idea/
+.vscode/
+liboqs-python/
