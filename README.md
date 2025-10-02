@@ -72,6 +72,27 @@ source venv/bin/activate
 # Install liboqs per the instructions at:
 # https://github.com/open-quantum-safe/liboqs-python
 
+git clone --depth=1 https://github.com/open-quantum-safe/liboqs
+cmake -S liboqs -B liboqs/build -DBUILD_SHARED_LIBS=ON
+cmake --build liboqs/build --parallel 8
+cmake --build liboqs/build --target install
+
+# The last line may require prefixing it by sudo on UNIX-like systems. Change --parallel 8 to match the number of available cores on your system.
+
+# On UNIX-like platforms, you may need to set the LD_LIBRARY_PATH (DYLD_LIBRARY_PATH on macOS) environment variable to point to the path to liboqs' library directory
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+# On Windows platforms, you must ensure that you add the -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE flag to CMake, and that the liboqs shared library oqs.dll is visible system-wide, i.e., set the PATH environment variable accordingly
+
+set PATH=%PATH%;C:\Program Files (x86)\liboqs\bin
+
+# Configure and install the wrapper
+
+git clone --depth=1 https://github.com/open-quantum-safe/liboqs-python
+cd liboqs-python
+pip install .
+
 # After installing liboqs, install the Python bindings and dependencies:
 pip install cryptography
 ```
