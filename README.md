@@ -2,6 +2,8 @@
 
 A tiny lab prototype that bootstraps a symmetric key from a server to one or more devices using post-quantum Kyber-1024, then keeps rotating keys with a symmetric ratchet. The server never learns the final working keys.
 
+**DISCLAIMER**: This was almost exclusively coded by an LLM based on inputs from a human with almost no experience of encryption...so do not believe anything!
+
 ---
 
 ## What is in here
@@ -177,11 +179,3 @@ pip install cryptography
 - Integrate with a real hardware secure element or TPM for `cohort_secret`.
 - Add transport (e.g., HTTP/gRPC) for ticket delivery.
 - Extend ratchet to include message counters and replay protection.
-- Explore other post-quantum KEMs supported by [liboqs](https://github.com/open-quantum-safe/liboqs).
-
----
-
-## License and attribution
-
-MIT License.  
-Uses [pyoqs](https://github.com/open-quantum-safe/liboqs-python) and [cryptography](https://cryptography.io/).
