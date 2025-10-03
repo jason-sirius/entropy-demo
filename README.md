@@ -12,7 +12,7 @@ A tiny lab prototype that bootstraps a symmetric key from a server to one or mor
   Reads device public keys, creates a per-device Kyber ciphertext, and emits an authenticated “ticket” each epoch. Each ticket includes the device audience, epoch timing, a hash-chain pointer, and a MAC for integrity. The ticket is written to `tickets/<DEVICE_ID>.json`.
 
 - **`server_loop.py`**  
-  Runs the same ticket issuance **continuously** (default: every 60 seconds). Useful for live demos: it regenerates per-device tickets each epoch so devices can keep deriving fresh keys.
+  Runs the same ticket issuance **continuously** (default: every 60 seconds). It regenerates per-device tickets each epoch so devices can keep deriving fresh keys.
 
 - **`device.py`**  
   Generates or loads a Kyber-1024 keypair, registers its public key, reads its ticket, verifies the MAC, checks audience and freshness, decapsulates the Kyber ciphertext to recover a per-device shared secret, then derives a 32-byte symmetric working key by mixing that secret with a sealed cohort secret using HKDF. The server cannot derive this key.
