@@ -1,4 +1,4 @@
-# Entropy KEM demo
+# Ratchetron
 
 A tiny lab prototype that bootstraps a symmetric key from a server to one or more devices using post-quantum [Kyber-1024](https://pq-crystals.org/kyber/index.shtml), then keeps rotating keys with a symmetric ratchet. The server never learns the final working keys.
 
